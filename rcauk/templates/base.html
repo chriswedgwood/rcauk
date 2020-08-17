@@ -1,0 +1,150 @@
+{% load static wagtailuserbar %}
+{% load wagtailcore_tags %}
+{% load render_bundle from webpack_loader %}
+{% load menu_tags %}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+            <script src="https://kit.fontawesome.com/fb67b2fef3.js" crossorigin="anonymous"></script>
+
+        <meta name="description" content="{% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% else %}aa-london carrying the message to the still suffering alcoholic{% endif %}{% if self.seo_title %} {{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% if active %}{{ active }}{% endif %}{% if description %} - {{ description }}{% endif %} "/>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}"/>
+        <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} - aa-london.com">
+        <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% else %}Alcoholics Anonymous London helping people who want to stop drinking to stop drinking{% endif %}{% if self.seo_title %} {{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% if active %}{{ active }}{% endif %}{% if description %} - {{ description }}{% endif %}">
+        <meta property="og:image" content="{% static 'images/favicon.ico' %}">
+        
+        <meta property="og:url" content="{{ page.full_url }}">
+        
+
+
+        <meta name="descriptionx" content="" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=0.9" />
+
+        {# Global stylesheets #}
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+               
+        
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+
+        
+
+         <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+       
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_tracking_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ ga_tracking_id }}');
+</script>
+
+
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+        <div id="wrapper">
+			
+
+
+ 
+
+            <!-- Header -->
+                <header id="header">
+                  
+                    {% main_menu max_levels=3 template="menus/main_menu_dropdown.html" sub_menu_template="menus/sub_menu.html" %}
+
+                
+                </header>
+
+            
+            
+           
+
+            <!-- Main -->
+                <main id="main">
+
+                            
+                            {% block content %}{% endblock %}
+                  
+
+                    
+
+
+                    
+
+                </main>
+
+            <!-- Sidebar -->
+                <aside id="sidebar">
+
+                    <!-- Intro -->
+                        <section id="intro-aa">
+                           <a href="#" class="logo"><img src="{% static 'images/rca_logo.jpg' %}" alt="" /></a>
+                            
+                            <header>
+                                <h2>Recovering Couples Anonymous United Kingdom</h2>
+                             
+
+                                <p>Ours is a fellowship of recovering couples. We suffer from many addictions and dysfunctions, and we share our experience, strength, and hope with each other that we may solve our common problems and help other recovering couples restore their relationships. The only requirement for membership is the desire to remain committed to each other and to develop new intimacy.
+
+There are no dues or fees for membership; we are self-supporting through our own contributions. We are not allied with any organization. We do not wish to engage in any controversy, neither endorse nor oppose any causes.
+
+Although there is no organizational affiliation between Alcoholics Anonymous and our fellowship, we are based on the principles of AA. Our primary purpose is to stay committed in loving and intimate relationships and to help other couples achieve freedom from dysfunctional relationships. </p>
+                            
+
+                            </header>
+                        </section>
+
+                    
+                        
+                    
+                    
+                
+                        
+
+                </aside>
+
+        </div>
+       
+
+        {# Global javascript #}
+        
+       
+               
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>        
+       
+        
+        
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+       
+       
+    </body>
+</html>

@@ -1,0 +1,77 @@
+{% load static wagtailcore_tags  %}
+{% load render_bundle from webpack_loader %}
+
+
+
+
+
+
+
+<div id="main-home">
+
+<!-- Post -->
+
+  <header>
+          <h2>Current Active Meetings</h2>
+          <p>Due to Covid-19 all UK meetings are online until further notice</p>
+  </header>
+
+    
+
+    <section id="meeting-search"></section>
+    <section id="new-to-aa"><h2>new to RCA?</h2>
+
+    <div id="arrow-wrapper">
+    <div class="arrow-wrapper-row"><span class="new-arrow"><img src="{% static 'images/black-arrow.svg' %}" alt="" /></span><span>Call us any time on <a class="blue-text" href="tel:0800 9177 650">0800 1234 5678</a></span></div>
+    <div class="arrow-wrapper-row"><span class="new-arrow"><img src="{% static 'images/black-arrow.svg' %}" alt="" /></span><span><a class="blue-text" href="mailto:help@aamail.org">Email Us</a></span></div>
+    <div class="arrow-wrapper-row"><span class="new-arrow"><img src="{% static 'images/black-arrow.svg' %}" alt="" /></span><span><a class="blue-text" href="https://www.alcoholics-anonymous.org.uk/About-AA/Newcomers" target="_blank" rel="noopener noreferrer">Learn more</a></span></div>
+    
+    </div>
+    
+   
+ 
+    </section>
+    <section id="notice-board"><h2>notices</h2>
+    {% for notice in notices%}
+    <div class="notice-board-row">
+      <div class="notice-arrow"><img src="{% static 'images/white-arrow.png' %}" alt="" /></div> 
+      <div class="notice-board-data-title"><h2>{{ notice.title }}</h2></div>
+      <div class="notice-board-data-description">{{ notice.description }}</div>
+      <div class="notice-board-data-link"><a class="blue-text"  {% if notice.link_page %} href="/{{ notice.link_page.slug }}"{% else %}href="{{notice.link}}"  target="_blank" {% endif %} >Learn More</a></div>
+    </div>
+
+    {% endfor%}
+    </section>
+
+    
+    
+
+
+   
+
+
+
+
+
+
+
+ <script>
+   window.topRecords = 5
+ </script>
+<script>
+  
+  
+  
+  window.react_mount = document.getElementById('meeting-search');
+ 
+  
+</script>
+
+{% block extra_js %}
+             {% render_bundle 'onlinemeetingsearch' %}
+
+        {% endblock %}
+ 
+ </div>
+
+
